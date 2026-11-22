@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ZGG – Zukunft gemeinsam gerecht</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap">
+<style>
+:root{
+  --bg:#F3F6F7; --surface:#FFFFFF; --ink:#0F2A43; --muted:#4B6075;
+  --accent:#FFC93C; --on-accent:#0F2A43; --teal:#1B7F86; --line:#D5DEE4;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B1B2B; --surface:#12283D; --ink:#EEF3F6; --muted:#A9BBCB;
+    --accent:#FFC93C; --on-accent:#0F2A43; --teal:#4FC3C9; --line:#27415A;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B1B2B; --surface:#12283D; --ink:#EEF3F6; --muted:#A9BBCB;
+  --accent:#FFC93C; --on-accent:#0F2A43; --teal:#4FC3C9; --line:#27415A;
+  color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:1.0625rem;line-height:1.6}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.25rem}
+
+header.top{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 0}
+.logo{font-weight:800;font-size:1.5rem;letter-spacing:.02em;text-decoration:none}
+nav a{margin-left:1.25rem;text-decoration:none;font-weight:600;color:var(--muted)}
+nav a:hover{color:var(--ink)}
+
+.hero{padding:3rem 0 4.5rem}
+.hero h1{margin:0;font-weight:800;line-height:.95;letter-spacing:-.03em;
+  font-size:clamp(3.2rem,12.5vw,9rem)}
+.hero h1 span{display:block}
+.hero h1 b{color:var(--accent);font-weight:800}
+.hero p.lead{max-width:36rem;margin:2rem 0 0;font-size:1.25rem;color:var(--muted)}
+.btns{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
+.btn{display:inline-block;padding:.85rem 1.5rem;border-radius:.4rem;font-weight:600;text-decoration:none;
+  background:var(--accent);color:var(--on-accent)}
+.btn.alt{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.btn:hover{filter:brightness(.95)}
+
+section{padding:4rem 0;border-top:1px solid var(--line)}
+section h2{margin:0 0 2rem;font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.1;letter-spacing:-.02em}
+
+.values{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
+.values h3{margin:0 0 .5rem;font-size:1.6rem;color:var(--teal)}
+.values p{margin:0;max-width:26rem}
+
+.topics{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))}
+.topic{background:var(--surface);padding:1.5rem;border-left:6px solid var(--accent)}
+.topic h3{margin:0 0 .4rem;font-size:1.25rem}
+.topic p{margin:0;color:var(--muted)}
+.topic ul{margin:0;padding-left:1.1rem}
+.topic li{margin-bottom:.35rem}
+.topic{font:inherit;color:inherit;text-align:left;width:100%;border:0;border-left:6px solid var(--accent);cursor:pointer;position:relative;padding-right:3.2rem}
+.topic::after{content:"+";position:absolute;right:1.1rem;top:1rem;font-size:1.6rem;font-weight:600;line-height:1;color:var(--teal)}
+.topic:hover{border-left-color:var(--teal)}
+.topic .t{display:block;font-size:1.25rem;font-weight:600;margin-bottom:.4rem}
+.topic .s{display:block;color:var(--muted)}
+dialog.modal{max-height:calc(100% - 2.5rem);overflow:auto;width:calc(100% - 2.5rem);max-width:34rem;padding:0;border:0;border-left:8px solid var(--accent);background:var(--surface);color:var(--ink);font:inherit}
+dialog.modal::backdrop{background:rgba(11,27,43,.65)}
+dialog.modal .inner{padding:1.75rem;position:relative}
+dialog.modal h3{margin:0 2rem 1rem 0;font-size:1.6rem;color:var(--teal)}
+dialog.modal p{margin:0 0 1rem}
+dialog.modal ul{margin:0;padding-left:1.1rem}
+dialog.modal li{margin-bottom:.5rem}
+.btn{font:inherit;cursor:pointer}
+button.btn{border:0}
+dialog.modal form label{display:block;margin:1rem 0 .3rem;font-weight:600}
+dialog.modal input[type=text],dialog.modal input[type=email],dialog.modal select,dialog.modal textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:.4rem;padding:.7rem .8rem}
+dialog.modal input:focus,dialog.modal select:focus,dialog.modal textarea:focus{outline:none;border-color:var(--teal)}
+dialog.modal textarea{resize:vertical}
+dialog.modal label.check{display:flex;gap:.6rem;align-items:flex-start;font-weight:400;margin-top:1.1rem;font-size:.95rem;color:var(--muted)}
+dialog.modal label.check input{margin-top:.25rem;width:1.1rem;height:1.1rem;flex:none}
+dialog.modal .err{margin:1rem 0 0;color:#B3261E;font-weight:600}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) dialog.modal .err{color:#FF8A80}}
+:root[data-theme="dark"] dialog.modal .err{color:#FF8A80}
+dialog.modal form .btn{margin-top:1.25rem}
+dialog.modal #signupDone .btn{margin-top:.5rem;color:var(--ink);border-color:var(--ink)}
+.linkbtn{font:inherit;color:inherit;background:none;border:0;padding:0;text-decoration:underline;cursor:pointer}
+dialog.modal h4{margin:1.2rem 0 .3rem;font-size:1.05rem}
+dialog.modal .close{position:absolute;top:.75rem;right:.75rem;width:2.5rem;height:2.5rem;border:0;background:transparent;color:var(--ink);font-size:2rem;line-height:1;cursor:pointer}
+.hint{margin:-1rem 0 1.5rem;color:var(--muted)}
+
+
+.join{background:var(--ink);color:var(--bg);border-top:none}
+.join .wrap{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));align-items:start}
+.join h2{margin:0}
+.join p{margin:0 0 1rem;max-width:30rem}
+.join .btn.alt{color:var(--bg);border-color:var(--bg)}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .join{background:var(--surface);color:var(--ink)}
+  :root:not([data-theme="light"]) .join .btn.alt{color:var(--ink);border-color:var(--ink)}
+}
+:root[data-theme="dark"] .join{background:var(--surface);color:var(--ink)}
+:root[data-theme="dark"] .join .btn.alt{color:var(--ink);border-color:var(--ink)}
+
+footer{padding:2rem 0 3rem;color:var(--muted);font-size:.95rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="logo" href="#top" id="top">ZGG</a>
+    <nav aria-label="Hauptmenü">
+      <a href="#werte">Werte</a>
+      <a href="#themen">Themen</a>
+      <a href="#mitmachen">Mitmachen</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <h1 aria-label="Zukunft gemeinsam gerecht">
+        <span><b>Z</b>ukunft</span>
+        <span><b>G</b>emeinsam</span>
+        <span><b>G</b>erecht</span>
+      </h1>
+      <p class="lead">Wir gründen ZGG, eine neue Partei, die Politik für alle machen will: mit konsequentem Klimaschutz für eine lebenswerte Zukunft, im Miteinander und mit fairen Chancen für jeden Menschen.</p>
+      <div class="btns">
+        <button type="button" class="btn" data-open="Bei der Gründung mitmachen">Jetzt mitmachen</button>
+        <a class="btn alt" href="#werte">Unsere Werte</a>
+      </div>
+    </div>
+  </main>
+</div>
+
+<section id="werte">
+  <div class="wrap">
+    <h2>Drei Worte, ein Versprechen</h2>
+    <div class="values">
+      <div>
+        <h3>Zukunft</h3>
+        <p>Wir denken über die nächste Wahl hinaus. Entscheidungen von heute müssen auch in 30 Jahren noch tragen.</p>
+      </div>
+      <div>
+        <h3>gemeinsam</h3>
+        <p>Gute Lösungen entstehen im Gespräch. Wir beteiligen Bürgerinnen und Bürger, statt über sie hinweg zu entscheiden.</p>
+      </div>
+      <div>
+        <h3>gerecht</h3>
+        <p>Gleiche Chancen, faire Regeln, Schutz für die Schwächeren. Gerechtigkeit ist unser Maßstab für jedes Vorhaben.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="themen">
+  <div class="wrap">
+    <h2>Wofür wir arbeiten</h2>
+    <p class="hint">Tippe auf ein Thema, um mehr zu erfahren.</p>
+    <div class="topics">
+      <button type="button" class="topic" data-target="d1"><span class="t">Klima und Mobilität</span><span class="s">Klimaschutz ist die Grundlage unserer Politik.</span></button>
+      <button type="button" class="topic" data-target="d2"><span class="t">Gerechte Steuern und Löhne</span><span class="s">Wer viel hat, trägt mehr bei. Wer arbeitet, kann davon leben.</span></button>
+      <button type="button" class="topic" data-target="d3"><span class="t">Bezahlbares Wohnen</span><span class="s">Wohnen darf kein Luxus sein.</span></button>
+      <button type="button" class="topic" data-target="d4"><span class="t">Bildungspolitik</span><span class="s">Keine Kürzungen bei den Schulen.</span></button>
+      <button type="button" class="topic" data-target="d5"><span class="t">Sichere Rente</span><span class="s">Im Alter verlässlich abgesichert.</span></button>
+    </div>
+    <template id="d1"><h3>Klima und Mobilität</h3><p>Der Klimawandel betrifft uns alle. Deshalb messen wir jede Entscheidung daran, ob sie auch künftigen Generationen eine lebenswerte Welt hinterlässt.</p><ul><li>Autofreie Innenstädte: mehr Raum für Menschen, Rad, Bus, Bahn und Grün</li><li>Ausbau der Windkraft, mit Beteiligung der Menschen vor Ort</li><li>Ein Jahresticket für Bus und Bahn für 365 Euro</li></ul></template>
+    <template id="d2"><h3>Gerechte Steuern und Löhne</h3><p>Gerechtigkeit heißt, dass starke Schultern mehr tragen als schwache. Wer arbeitet, soll von seinem Lohn gut leben können.</p><ul><li>Große Vermögen und Erbschaften stärker besteuern</li><li>Mindestlohn ab 1. Januar 2028 um 1,50 Euro höher</li><li>Das zusätzliche Steuergeld fließt in Klimaschutz, Bildung und soziale Sicherheit</li></ul></template>
+    <template id="d3"><h3>Bezahlbares Wohnen</h3><p>Wir wollen Wohnungen, die sich auch Menschen mit normalem Einkommen leisten können. Wohnen ist ein Grundbedürfnis und darf nicht vom Geldbeutel abhängen.</p><ul><li>Mehr bezahlbare Wohnungen bauen, auch Sozialwohnungen</li><li>Mieten für normale Einkommen tragbar halten</li><li>Wohnungsbau fördern, der dem Gemeinwohl dient</li></ul></template>
+    <template id="d4"><h3>Bildungspolitik</h3><p>Bildung ist die Grundlage für gleiche Chancen. Deshalb darf bei den Schulen nicht gekürzt werden. Jedes Kind soll unabhängig vom Elternhaus gute Chancen haben.</p><ul><li>Schulen stärker digitalisieren: Im Unterricht wird mehr mit Tablets, zum Beispiel iPads, gelernt.</li><li>Kinder lernen früher, mit KI umzugehen. Nicht als Lösung für alles, sondern als Werkzeug.</li><li>Fördergelder für Schulen bereitstellen</li></ul></template>
+    <template id="d5"><h3>Sichere Rente</h3><p>Wir stärken die gesetzliche Rentenversicherung, damit Menschen im Alter verlässlich abgesichert sind. Das gilt für heute und auch für die junge Generation.</p><ul><li>Schrittweise mehr Berufsgruppen einbeziehen, zum Beispiel Selbstständige und neue Beamte</li><li>Bestehende Rentenansprüche bleiben sicher</li><li>Der Umbau bleibt bezahlbar und wird Schritt für Schritt umgesetzt</li></ul></template>
+    <dialog class="modal" id="detail" aria-label="Genauere Informationen zum Thema">
+      <div class="inner"><button type="button" class="close" aria-label="Schließen">×</button><div id="detailBody"></div></div>
+    </dialog>
+  </div>
+</section>
+
+<section class="join" id="mitmachen">
+  <div class="wrap">
+    <div>
+      <h2>Gestalte mit uns die Zukunft</h2>
+      <p>Ob Gründungsmitglied, Unterstützerin oder einfach neugierig: Schreib uns, wir melden uns bei dir.</p>
+    </div>
+    <div>
+      <p>Wir suchen Menschen, die anpacken, Ideen einbringen und Verantwortung übernehmen wollen.</p>
+      <div class="btns">
+        <button type="button" class="btn" data-open="Bei der Gründung mitmachen">Bei der Gründung mitmachen</button>
+        <button type="button" class="btn alt" data-open="Eine Frage stellen">Kontakt aufnehmen</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<template id="legal-imp"><h3>Impressum</h3>
+<h4>Angaben nach § 5 Digitale-Dienste-Gesetz</h4>
+<p>Gründungsinitiative ZGG – Zukunft gemeinsam gerecht<br>(noch keine gegründete oder eingetragene Partei)</p>
+<p>Birk Wallner<br>Professor-Brix-Weg 7<br>22767 Hamburg</p>
+<h4>Initiatoren</h4>
+<p>Birk Wallner (vorgesehener Vorsitzender)<br>Justus Mateo de Sousa Pipa<br>Levi Aithalides Tomchuk<br>Luke [Nachname]<br>[Name 5]</p>
+<h4>Kontakt</h4>
+<p>E-Mail: birk@herrwallner.net<br>Telefon: +49 176 81262011</p>
+<h4>Verantwortlich für die Inhalte</h4>
+<p>Birk Wallner, Anschrift wie oben</p></template>
+<template id="legal-dsg"><h3>Datenschutz</h3>
+<h4>Verantwortlicher</h4>
+<p>Die Gründungsinitiative ZGG – Zukunft gemeinsam gerecht, vertreten durch Birk Wallner. Anschrift und Kontakt wie im Impressum.</p>
+<h4>Welche Daten wir verarbeiten</h4>
+<p>Wenn du das Kontaktformular nutzt, verarbeiten wir deinen Namen, deine E-Mail-Adresse, deine Auswahl und, wenn du sie schreibst, deine Nachricht.</p>
+<h4>Wofür und auf welcher Grundlage</h4>
+<p>Wir nutzen die Angaben, um dir zu antworten und dich über eine mögliche Mitarbeit zu informieren. Grundlage ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Du kannst sie jederzeit mit Wirkung für die Zukunft widerrufen.</p>
+<h4>Wie lange wir die Daten speichern</h4>
+<p>[Speicherdauer, zum Beispiel: bis du deine Einwilligung widerrufst oder deine Anfrage erledigt ist]</p>
+<h4>Deine Rechte</h4>
+<p>Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung und Datenübertragbarkeit. Du kannst dich außerdem bei der zuständigen Datenschutzaufsichtsbehörde beschweren.</p>
+<h4>Hosting und Schriftarten</h4>
+<p>[Angaben zum Hosting-Anbieter und zu den verwendeten Schriftarten]</p></template>
+<footer>
+  <div class="wrap">
+    <span>© 2026 ZGG – Zukunft gemeinsam gerecht</span>
+    <span><button type="button" class="linkbtn" data-legal="legal-imp">Impressum</button> · <button type="button" class="linkbtn" data-legal="legal-dsg">Datenschutz</button></span>
+  </div>
+</footer>
+<dialog class="modal" id="signup" aria-label="Mitmachen bei ZGG">
+  <div class="inner">
+    <button type="button" class="close" aria-label="Schließen">×</button>
+    <form id="signupForm" novalidate>
+      <h3>Mitmachen bei ZGG</h3>
+      <label for="f-reason">Worum geht es?</label>
+      <select id="f-reason" name="reason">
+        <option>Bei der Gründung mitmachen</option>
+        <option>Als Unterstützerin oder Unterstützer helfen</option>
+        <option>Eine Frage stellen</option>
+      </select>
+      <label for="f-name">Name</label>
+      <input type="text" id="f-name" name="name" autocomplete="name">
+      <label for="f-mail">E-Mail-Adresse</label>
+      <input type="email" id="f-mail" name="email" autocomplete="email" inputmode="email" placeholder="name@beispiel.de">
+      <label for="f-msg">Nachricht (optional)</label>
+      <textarea id="f-msg" name="message" rows="3"></textarea>
+      <label class="check"><input type="checkbox" id="f-ok"><span>Ich bin einverstanden, dass ZGG mich per E-Mail kontaktiert.</span></label>
+      <p class="err" id="f-err" role="alert" hidden></p>
+      <button type="submit" class="btn">Absenden</button>
+    </form>
+    <div id="signupDone" hidden>
+      <h3>Danke für dein Interesse an ZGG!</h3>
+      <p>Schön, dass du mitgestalten möchtest.</p>
+      <button type="button" class="btn alt" id="doneClose">Schließen</button>
+    </div>
+  </div>
+</dialog>
+<script>
+(function(){
+  var dlg=document.getElementById('detail'),body=document.getElementById('detailBody');
+  if(!dlg||!dlg.showModal)return;
+  document.querySelectorAll('.topic').forEach(function(b){
+    b.addEventListener('click',function(){
+      var t=document.getElementById(b.dataset.target);
+      body.replaceChildren(t.content.cloneNode(true));
+      dlg.showModal();
+    });
+  });
+  dlg.querySelector('.close').addEventListener('click',function(){dlg.close();});
+  dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close();});
+})();
+</script>
+<script>
+(function(){
+  var dlg=document.getElementById('signup');
+  if(!dlg||!dlg.showModal)return;
+  var form=document.getElementById('signupForm'),done=document.getElementById('signupDone'),err=document.getElementById('f-err');
+  document.querySelectorAll('[data-open]').forEach(function(b){
+    b.addEventListener('click',function(){
+      form.reset();err.hidden=true;form.hidden=false;done.hidden=true;
+      document.getElementById('f-reason').value=b.dataset.open;
+      dlg.showModal();
+    });
+  });
+  function close(){dlg.close();}
+  dlg.querySelector('.close').addEventListener('click',close);
+  document.getElementById('doneClose').addEventListener('click',close);
+  dlg.addEventListener('click',function(e){if(e.target===dlg)close();});
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var name=document.getElementById('f-name'),mail=document.getElementById('f-mail'),ok=document.getElementById('f-ok'),msg='',el=null;
+    if(!name.value.trim()){msg='Bitte gib deinen Namen ein.';el=name;}
+    else if(!mail.value.trim()||!mail.checkValidity()){msg='Bitte gib eine gültige E-Mail-Adresse ein.';el=mail;}
+    else if(!ok.checked){msg='Bitte stimme zu, dass wir dich kontaktieren dürfen.';el=ok;}
+    if(msg){err.textContent=msg;err.hidden=false;el.focus();return;}
+    err.hidden=true;form.hidden=true;done.hidden=false;
+  });
+})();
+</script>
+<script>
+(function(){
+  var dlg=document.getElementById('detail'),body=document.getElementById('detailBody');
+  if(!dlg||!dlg.showModal)return;
+  document.querySelectorAll('[data-legal]').forEach(function(b){
+    b.addEventListener('click',function(){
+      body.replaceChildren(document.getElementById(b.dataset.legal).content.cloneNode(true));
+      dlg.showModal();
+    });
+  });
+})();
+</script>
+</body>
+</html>
