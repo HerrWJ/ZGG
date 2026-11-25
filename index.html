@@ -101,6 +101,13 @@ dialog.modal .close{position:absolute;top:.75rem;right:.75rem;width:2.5rem;heigh
 .hint{margin:-1rem 0 1.5rem;color:var(--muted)}
 
 
+.faq{max-width:44rem}
+.faq details{background:var(--surface);border-left:6px solid var(--accent);margin-bottom:.75rem}
+.faq summary{list-style:none;cursor:pointer;position:relative;padding:1rem 3rem 1rem 1.25rem;font-weight:600;font-size:1.1rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:1.1rem;top:.85rem;font-size:1.6rem;line-height:1;color:var(--teal)}
+.faq details[open] summary::after{content:"\2212"}
+.faq details p{margin:0;padding:0 1.25rem 1.25rem;color:var(--muted)}
 .about{max-width:40rem;font-size:1.25rem}
 .about p{margin:0 0 1rem}
 .event{display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;background:var(--surface);padding:1.5rem;border-left:6px solid var(--accent)}
@@ -232,6 +239,19 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between}
         <p>Donnerstag, 26. November 2026, von 8:00 bis 9:00 Uhr, Ort: B3.8. Wir stellen uns, unser Team und unsere Ziele vor.</p>
         <button type="button" class="btn alt" data-open="Eine Frage stellen">Ich habe eine Frage</button>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2>Häufige Fragen</h2>
+    <div class="faq">
+      <details><summary>Seid ihr schon eine Partei?</summary><p>Noch nicht. Wir sind eine Gründungsinitiative und bereiten die Gründung von ZGG vor. Neuigkeiten dazu findest du hier auf der Seite.</p></details>
+      <details><summary>Wer steckt hinter ZGG?</summary><p>Fünf Menschen, die die Gründung gemeinsam vorbereiten. Ihre Namen findest du im Impressum.</p></details>
+      <details><summary>Was wollt ihr erreichen?</summary><p>Wir setzen uns für Klimaschutz, gerechtere Steuern und Löhne, bezahlbares Wohnen, gute Bildung und eine sichere Rente ein. Mehr dazu findest du oben bei den Themen.</p></details>
+      <details><summary>Wie kann ich mithelfen?</summary><p>Klick auf „Ich bin dabei“ und schreib uns, oder komm zu unserer Vorstellung am 26. November 2026. Wir freuen uns über Ideen, Fragen und tatkräftige Hilfe.</p></details>
+      <details><summary>Wie erreiche ich euch?</summary><p>Über das Formular auf dieser Seite oder per E-Mail an birk@herrwallner.net.</p></details>
     </div>
   </div>
 </section>
